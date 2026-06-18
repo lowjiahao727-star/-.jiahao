@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>接单大厅</title>
+
+<style>
+body{
+    margin:0;
+    background:#f5f5f5;
+    font-family:Arial;
+}
+
+.header{
+    height:55px;
+    background:#2196f3;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.card{
+    background:#fff;
+    margin:10px;
+    padding:15px;
+    border-radius:12px;
+}
+
+.title{font-weight:bold;}
+.desc{color:#666;margin-top:5px;}
+.price{color:red;margin-top:8px;}
+
+.btn{
+    margin-top:10px;
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    background:#4caf50;
+    color:#fff;
+    font-size:16px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">接单大厅</div>
+
+<div class="card">
+    <div class="title">网页首页制作</div>
+    <div class="desc">制作一个手机端首页UI</div>
+    <div class="price">￥50</div>
+    <button class="btn" onclick="takeOrder('网页首页制作','制作一个手机端首页UI','50')">
+        接单
+    </button>
+</div>
+
+<div class="card">
+    <div class="title">Discord机器人开发</div>
+    <div class="desc">派单 + 记录功能</div>
+    <div class="price">￥120</div>
+    <button class="btn" onclick="takeOrder('Discord机器人开发','派单+记录功能','120')">
+        接单
+    </button>
+</div>
+
+<script>
+function takeOrder(title, desc, price){
+    // 1. 读取旧订单
+    let orders = JSON.parse(localStorage.getItem("orders") || "[]");
+
+    // 2. 添加新订单
+    orders.push({
+        title: title,
+        desc: desc,
+        price: price,
+        time: new Date().toLocaleString()
+    });
+
+    // 3. 保存回去
+    localStorage.setItem("orders", JSON.stringify(orders));
+
+    alert("接单成功！已加入我的订单");
+}
+</script>
+
+</body>
+</html>
