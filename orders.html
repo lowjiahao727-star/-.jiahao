@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>我的订单</title>
+
+<style>
+body{
+    margin:0;
+    background:#f5f5f5;
+    font-family:Arial;
+}
+
+.header{
+    height:55px;
+    background:#2196f3;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.card{
+    background:#fff;
+    margin:10px;
+    padding:15px;
+    border-radius:12px;
+}
+
+.title{font-weight:bold;}
+.price{color:red;margin-top:8px;}
+.time{color:#999;font-size:12px;margin-top:5px;}
+</style>
+</head>
+
+<body>
+
+<div class="header">我的订单</div>
+
+<div id="list"></div>
+
+<script>
+function loadOrders(){
+    let orders = JSON.parse(localStorage.getItem("orders") || "[]");
+    let list = document.getElementById("list");
+
+    if(orders.length === 0){
+        list.innerHTML = "<div class='card'>暂无订单</div>";
+        return;
+    }
+
+    list.innerHTML = "";
+
+    orders.forEach(o=>{
+        list.innerHTML += `
+        <div class="card">
+            <div class="title">${o.title}</div>
+            <div>${o.desc}</div>
+            <div class="price">￥${o.price}</div>
+            <div class="time">${o.time}</div>
+        </div>`;
+    });
+}
+
+loadOrders();
+</script>
+
+</body>
+</html>
